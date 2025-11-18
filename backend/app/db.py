@@ -9,7 +9,7 @@ async def connect_db():
     global client , db
     load_dotenv()
     uri = os.environ.get("MONGO_URI","mongodb://localhost:27017")
-    client = AsyncIOMotorClient(uri)
+    client = AsyncIOMotorClient(uri, tz_aware=True)
     db = client[os.environ.get("MONGO_DB","ideasTita")]
     
 async def close_db():

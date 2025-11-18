@@ -6,7 +6,7 @@ from jose import jwt
 
 load_dotenv()
 
-pwd_context = CryptContext(schemes=["bcrypt"],deprecated="auto")
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 SECRET_KEY = os.environ.get("JWT_SECRET","NO HAY SECRET")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_SECONDS = int(os.environ.get("JWT_EXPIRE_SECONDS","3600"))

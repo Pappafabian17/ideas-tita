@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from ..db import get_db
 from ..security import verify_password, get_password_hash, create_access_token, decode_token
 
@@ -9,8 +9,8 @@ router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
 class UserCreate(BaseModel):
-    username:str
-    password : str
+    username: str = Field(min_length=3, max_length=64)
+    password: str = Field(min_length=8, max_length=128)
     
 class Token(BaseModel):
     access_token: str
